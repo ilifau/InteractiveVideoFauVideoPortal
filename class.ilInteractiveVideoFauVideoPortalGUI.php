@@ -20,6 +20,7 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 		$object = new ilInteractiveVideoFauVideoPortal();
 		$data = $object->doReadVideoSource($obj_id);
 		$fau_id->setValue($data['fau_id']);
+		$fau_id->setInfo('&nbsp;');
 		$option->addSubItem($fau_id);
 		$fau_url = new ilHiddenInputGUI('fau_url');
 		$fau_url->setValue($data['fau_url']);
