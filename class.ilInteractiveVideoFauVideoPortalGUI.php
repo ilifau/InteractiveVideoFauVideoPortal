@@ -14,17 +14,18 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 	 */
 	public function getForm($option, $obj_id)
 	{
-		global $tpl;
+		global $tpl, $lng, $tpl;
 		$tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/InteractiveVideo/VideoSources/plugin/InteractiveVideoFauVideoPortal/js/fauMediaPortalAjaxQuery.js');
 		$fau_id = new ilTextInputGUI(ilInteractiveVideoPlugin::getInstance()->txt('fau_id'), 'fau_id');
 		$object = new ilInteractiveVideoFauVideoPortal();
 		$data = $object->doReadVideoSource($obj_id);
 		$fau_id->setValue($data['fau_id']);
-		$fau_id->setInfo('&nbsp;');
+		$fau_id->setInfo(ilInteractiveVideoPlugin::getInstance()->txt('fau_id_info'));
 		$option->addSubItem($fau_id);
 		$fau_url = new ilHiddenInputGUI('fau_url');
 		$fau_url->setValue($data['fau_url']);
 		$option->addSubItem($fau_url);
+		$lng->toJS(array('rep_robj_xvid_fau_video_found', 'rep_robj_xvid_fau_not_found'), $tpl);
 		return $option;
 	}
 

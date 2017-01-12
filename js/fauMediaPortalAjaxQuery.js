@@ -18,7 +18,7 @@ il.fauMediaQuery = (function (scope) {
 				pub.video_title = data.title;
 			},
 			error: function(XMLHttpRequest, textStatus, errorThrown) {
-				
+				pro.setVideoTitle(il.Language.lng.rep_robj_xvid_fau_not_found);
 			}
 		});
 	};
@@ -30,8 +30,12 @@ il.fauMediaQuery = (function (scope) {
 			pub.getVideoUrl($(this).val());
 			if(pub.video_url !== null)
 			{
-				pro.setVideoTitle(pub.video_title);
+				pro.setVideoTitle(il.Language.lng.rep_robj_xvid_fau_video_found + ' ' + pub.video_title);
 				$('#fau_url').val(pub.video_url)
+			}
+			else
+			{
+				pro.setVideoTitle(il.Language.lng.rep_robj_xvid_fau_not_found);
 			}
 		});
 	};
