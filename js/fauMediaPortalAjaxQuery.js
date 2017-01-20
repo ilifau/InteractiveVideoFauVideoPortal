@@ -8,6 +8,8 @@ il.fauMediaQuery = (function (scope) {
 // 16292
 	pub.getVideoUrl = function(video_id)
 	{
+		pub.video_url = null;
+
 		$.ajax({
 			type     : "GET",
 			dataType : "JSON",
