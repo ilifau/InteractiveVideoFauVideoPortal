@@ -26,6 +26,16 @@ class ilInteractiveVideoFauVideoPortal implements ilInteractiveVideoSource
 	protected $core_folder;
 
 	/**
+	 * @var string
+	 */
+	protected $fau_id;
+
+	/**
+	 * @var string
+	 */
+	protected $fau_url;
+
+	/**
 	 * ilInteractiveVideoYoutube constructor.
 	 */
 	public function __construct()
@@ -55,7 +65,8 @@ class ilInteractiveVideoFauVideoPortal implements ilInteractiveVideoSource
 		global $ilDB;
 		$result = $ilDB->query('SELECT fau_id, fau_url FROM '.self::TABLE_NAME.' WHERE obj_id = '.$ilDB->quote($obj_id, 'integer'));
 		$row = $ilDB->fetchAssoc($result);
-		return array('fau_id' => $row['fau_id'], 'fau_url' => $row['fau_url']);
+		$this->setFauId($row['fau_id']);
+		$this->setFauUrl($row['fau_url']);
 	}
 
 	/**
@@ -72,8 +83,8 @@ class ilInteractiveVideoFauVideoPortal implements ilInteractiveVideoSource
 	 */
 	public function doCloneVideoSource($original_obj_id, $new_obj_id)
 	{
-		$data = $this->doReadVideoSource($original_obj_id);
-		$this->saveData($new_obj_id, $data['fau_id'], $data['fau_url']);
+		$this->doReadVideoSource($original_obj_id);
+		$this->saveData($new_obj_id, $this->getFauId(), $this->getFauUrl());
 	}
 
 	/**
@@ -99,8 +110,16 @@ class ilInteractiveVideoFauVideoPortal implements ilInteractiveVideoSource
 	 */
 	public function doUpdateVideoSource($obj_id)
 	{
-		$fau_id = ilUtil::stripSlashes($_POST['fau_id']);
-		$fau_url = ilUtil::stripSlashes($_POST['fau_url']);
+		if(ilUtil::stripSlashes($_POST['fau_id']))
+		{
+			$fau_id = ilUtil::stripSlashes($_POST['fau_id']);
+			$fau_url =ilUtil::stripSlashes($_POST['fau_url']);
+		}
+		else
+		{
+			$fau_id = $this->getFauId();
+			$fau_url = $this->getFauUrl();
+		}
 		$this->removeEntryFromTable($obj_id);
 		$this->saveData($obj_id, $fau_id, $fau_url);
 	}
@@ -173,12 +192,64 @@ class ilInteractiveVideoFauVideoPortal implements ilInteractiveVideoSource
 	}
 
 	/**
+	 * @param $obj_id
+	 * @return string
+	 */
+	public function getPath($obj_id)
+	{
+		return '';
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFauId()
+	{
+		return $this->fau_id;
+	}
+
+	/**
+	 * @param string $fau_id
+	 */
+	public function setFauId($fau_id)
+	{
+		$this->fau_id = $fau_id;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getFauUrl()
+	{
+		return $this->fau_url;
+	}
+
+	/**
+	 * @param string $fau_url
+	 */
+	public function setFauUrl($fau_url)
+	{
+		$this->fau_url = $fau_url;
+	}
+
+	/**
 	 * @param int $obj_id
 	 * @param ilXmlWriter $xml_writer
 	 * @param string $export_path
 	 */
 	public function doExportVideoSource($obj_id, $xml_writer, $export_path)
 	{
-		
+		$this->doReadVideoSource($obj_id);
+		$xml_writer->xmlElement('FauId', null, (string)$this->getFauId());
+		$xml_writer->xmlElement('FauURL', null, (string)$this->getFauUrl());
+	}
+
+	/**
+	 *
+	 */
+	public function getVideoSourceImportParser()
+	{
+		require_once 'Customizing/global/plugins/Services/Repository/RepositoryObject/InteractiveVideo/VideoSources/plugin/InteractiveVideoFauVideoPortal/class.ilInteractiveVideoFauXMLParser.php';
+		return 'ilInteractiveVideoFauXMLParser';
 	}
 }

@@ -18,12 +18,12 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 		$tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/InteractiveVideo/VideoSources/plugin/InteractiveVideoFauVideoPortal/js/fauMediaPortalAjaxQuery.js');
 		$fau_id = new ilTextInputGUI(ilInteractiveVideoPlugin::getInstance()->txt('fau_id'), 'fau_id');
 		$object = new ilInteractiveVideoFauVideoPortal();
-		$data = $object->doReadVideoSource($obj_id);
-		$fau_id->setValue($data['fau_id']);
+		$object->doReadVideoSource($obj_id);
+		$fau_id->setValue($object->getFauId());
 		$fau_id->setInfo(ilInteractiveVideoPlugin::getInstance()->txt('fau_id_info'));
 		$option->addSubItem($fau_id);
 		$fau_url = new ilHiddenInputGUI('fau_url');
-		$fau_url->setValue($data['fau_url']);
+		$fau_url->setValue($object->getFauUrl());
 		$option->addSubItem($fau_url);
 		$lng->toJS(array('rep_robj_xvid_fau_video_found', 'rep_robj_xvid_fau_not_found'), $tpl);
 		return $option;
@@ -64,8 +64,8 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 	{
 		$player		= new ilTemplate('Customizing/global/plugins/Services/Repository/RepositoryObject/InteractiveVideo/VideoSources/plugin/InteractiveVideoFauVideoPortal/tpl/tpl.video.html', false, false);
 		$instance	= new ilInteractiveVideoFauVideoPortal();
-		$data		= $instance->doReadVideoSource($obj->getId());
-		$player->setVariable('FAU_URL', $data['fau_url']);
+		$instance->doReadVideoSource($obj->getId());
+		$player->setVariable('FAU_URL', $instance->getFauUrl());
 		return $player;
 	}
 
@@ -76,10 +76,10 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 	public function getEditFormCustomValues(array &$a_values, $obj)
 	{
 		$instance = new ilInteractiveVideoFauVideoPortal();
-		$value = $instance->doReadVideoSource($obj->getId());
+		$instance->doReadVideoSource($obj->getId());
 	
-		$a_values[ilInteractiveVideoFauVideoPortal::FORM_ID_FIELD] = $value['fau_id'];
-		$a_values[ilInteractiveVideoFauVideoPortal::FORM_URL_FIELD] = $value['fau_url'];
+		$a_values[ilInteractiveVideoFauVideoPortal::FORM_ID_FIELD] = $instance->getFauId();
+		$a_values[ilInteractiveVideoFauVideoPortal::FORM_URL_FIELD] = $instance->getFauUrl();
 	}
 
 	/**
