@@ -252,4 +252,13 @@ class ilInteractiveVideoFauVideoPortal implements ilInteractiveVideoSource
 		require_once 'Customizing/global/plugins/Services/Repository/RepositoryObject/InteractiveVideo/VideoSources/plugin/InteractiveVideoFauVideoPortal/class.ilInteractiveVideoFauXMLParser.php';
 		return 'ilInteractiveVideoFauXMLParser';
 	}
+
+	/**
+	 * @param $obj_id
+	 * @param $import_dir
+	 */
+	public function afterImportParsing($obj_id, $import_dir)
+	{
+
+	}
 }
