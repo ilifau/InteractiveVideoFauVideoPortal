@@ -7,9 +7,9 @@ var player = null;
 	il.Util.addOnLoad(function () {
 		il.InteractiveVideo.last_stopPoint = -1;
 
-		var options = {};
+		var options = {'debug' : il.InteractiveVideo.iv_debug};
 
-		player = plyr.setup('#ilInteractiveVideo')[0];
+		player = plyr.setup('#ilInteractiveVideo', options)[0];
 		var interval = null;
 
 		il.InteractiveVideoPlayerAbstract.config = {
@@ -17,8 +17,7 @@ var player = null;
 			playCallback               : (function (){player.play();}),
 			durationCallback           : (function (){return player.getDuration();}),
 			currentTimeCallback        : (function (){return player.getCurrentTime();}),
-			setCurrentTimeCallback     : (function (time){player.seek(time);}),
-			external : false
+			setCurrentTimeCallback     : (function (time){player.seek(time);})
 		};
 
 		il.InteractiveVideoPlayerComments.fillEndTimeSelector(il.InteractiveVideoPlayerAbstract.duration());
@@ -45,8 +44,12 @@ var player = null;
 		});
 
 		player.on('ready', function(e){
-			il.InteractiveVideoPlayerAbstract.readyCallback();
+
 		});
 
+		player.on('loadedmetadata', function(e){
+			il.InteractiveVideoOverlayMarker.checkForEditScreen();
+			il.InteractiveVideoPlayerAbstract.readyCallback();
+		});
 	});
 })(jQuery);
