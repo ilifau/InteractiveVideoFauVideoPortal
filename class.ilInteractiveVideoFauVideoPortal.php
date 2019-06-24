@@ -261,4 +261,9 @@ class ilInteractiveVideoFauVideoPortal implements ilInteractiveVideoSource
 	{
 
 	}
+
+    public function hasOwnPlayer()
+    {
+        return false;
+    }
 }
