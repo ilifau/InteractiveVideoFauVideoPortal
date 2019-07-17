@@ -60,11 +60,12 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 	 * @param ilObjInteractiveVideo $obj
 	 * @return ilTemplate
 	 */
-	public function getPlayer($obj)
+	public function getPlayer($player_id, $obj)
 	{
 		$player		= new ilTemplate('Customizing/global/plugins/Services/Repository/RepositoryObject/InteractiveVideo/VideoSources/plugin/InteractiveVideoFauVideoPortal/tpl/tpl.video.html', false, false);
 		$instance	= new ilInteractiveVideoFauVideoPortal();
 		$instance->doReadVideoSource($obj->getId());
+		$player->setVariable('PLAYER_ID', $player_id);
 		$player->setVariable('FAU_URL', $instance->getFauUrl());
 		return $player;
 	}
