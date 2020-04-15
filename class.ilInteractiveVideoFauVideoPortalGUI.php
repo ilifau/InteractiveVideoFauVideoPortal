@@ -25,6 +25,11 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 		$fau_url = new ilHiddenInputGUI('fau_url');
 		$fau_url->setValue($object->getFauUrl());
 		$option->addSubItem($fau_url);
+
+		$fau_info = new ilNonEditableValueGUI('');
+		$fau_info->setInfo(ilInteractiveVideoPlugin::getInstance()->txt('fau_id_explain'));
+        $option->addSubItem($fau_info);
+
 		$lng->toJS(array('rep_robj_xvid_fau_video_found', 'rep_robj_xvid_fau_not_found'), $tpl);
 		return $option;
 	}

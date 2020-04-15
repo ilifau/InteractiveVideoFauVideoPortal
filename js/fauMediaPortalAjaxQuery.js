@@ -13,7 +13,7 @@ il.fauMediaQuery = (function (scope) {
 		$.ajax({
 			type     : "GET",
 			dataType : "JSON",
-			url      : 'https://www.video.uni-erlangen.de/services/oembed/?url=https://www.video.uni-erlangen.de/webplayer/id/' + video_id + '&format=json',
+			url      : 'https://itunes.video.uni-erlangen.de/services/oembed/?url=https://www.video.uni-erlangen.de/clip/id/' + video_id + '&format=json',
 			async    : false,
 			success  : function(data) {
 				pub.video_url = data.file;

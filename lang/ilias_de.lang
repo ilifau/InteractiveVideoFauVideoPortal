@@ -1,5 +1,6 @@
 fvp#:#FAU Video Portal
-fau_id#:#Resource-ID
-fau_id_info#:#Geben sie bitte eine Resource-ID von www.video.uni-erlangen.de an.
+fau_id#:#Clip-ID
+fau_id_info#:#Geben Sie hier die Clip-ID aus dem Videoportal ein
+fau_id_explain#:#<p class="alert alert-info">Die Nutzung als Interaktives Video ist nur für frei zugängliche Clips auf dem Videoportal möglich. Sie finden die Clip-ID auf <a href="www.video.uni-erlangen.de">www.video.uni-erlangen.de</a> auf der Abspiel-Seite eines Clips im Titel über dem Video.</p>
 fau_video_found#:#Video gefunden mit dem Titel: 
-fau_not_found#:#Kein Video zu dieser Resource-ID gefunden.
+fau_not_found#:#Kein Video zu dieser Clip-ID gefunden.
