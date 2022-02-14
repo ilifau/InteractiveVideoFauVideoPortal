@@ -56,9 +56,7 @@ class ilInteractiveVideoFauVideoPortalGUI implements ilInteractiveVideoSourceGUI
 	public function addPlayerElements($tpl)
 	{
 		$tpl->addJavaScript('Customizing/global/plugins/Services/Repository/RepositoryObject/InteractiveVideo/VideoSources/plugin/InteractiveVideoFauVideoPortal/js/jquery.InteractiveVideoFauVideoPortalPlayer.js');
-        // fau: jumpMedia - prevent custom player for interactive video
-        ilPlayerUtil::initMediaElementJs($tpl, false);
-        // fau.
+        ilPlayerUtil::initMediaElementJs($tpl);
 		return $tpl;
 	}
 

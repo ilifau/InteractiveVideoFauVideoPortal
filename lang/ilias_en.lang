@@ -1,6 +1,6 @@
 fvp#:#FAU Video Portal
 fau_id#:#Clip-ID
 fau_id_info#:#Please insert a Clip-ID from the video portal
-fau_id_explain#:#<p class="alert alert-info">Interaktive Videos are only possible for clips with public access. You see the Clip-ID on <a href="www.video.uni-erlangen.de">www.video.uni-erlangen.de</a> in the title on page with the video player.</p>
+fau_id_explain#:#<p class="alert alert-info">Interaktive Videos are only possible for clips with public access. You see the Clip-ID on <a href="https://www.fau.tv" target="_blank">www.fau.tv</a> in the title on page with the video player.</p>
 fau_video_found#:#Video found with the title:
 fau_not_found#:#No Video found to this Clip-ID.
